@@ -74,7 +74,7 @@ function sharesCounter($echo = true) {
 	$url = get_permalink();
 
 	if ( $scfacebook ) {
-		$url_fb = "http://api.facebook.com/restserver.php?method=links.getStats&urls=" . $url;
+		$url_fb = "https://api.facebook.com/restserver.php?method=links.getStats&urls=" . $url;
 		$data_fb = simplexml_load_file($url_fb);
 		if ( isset($data_fb->link_stat->share_count) ) {
 			$shares = $shares + $data_fb->link_stat->share_count;
