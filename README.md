@@ -1,7 +1,7 @@
-WPSocial Counter (v.0.9)
+WPSocial Counter (v.0.10)
 ========================
 
-This plugin allows the user to display the amount of times that an URL have been shared on different social networks. Right now it supports Facebook, Twitter, Google Plus and LinkedIn. (based from GusFune's work https://github.com/gusfune/shares-counter)
+This plugin allows the user to display the amount of times that an URL have been shared on different social networks. Right now it supports Facebook, Google Plus and LinkedIn. (based from GusFune's work https://github.com/gusfune/shares-counter)
 
 This repository contains the open source PHP and is licensed under the Apache Licence, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0.html).
 
