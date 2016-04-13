@@ -4,14 +4,13 @@
 Plugin Name: WPShare Counter
 Plugin URI: https://github.com/phalkmin/WPShare-Counter
 Description: This plugin allows the user to display the amount of times that an URL have been shared on different social networks. Right now it supports Facebook, Twitter, Google Plus and LinkedIn. (based from GusFune's work https://github.com/gusfune/shares-counter)
-Author: GraveHeart 
+Author: GraveHeart
 Version: 0.9
 
-*/ 
+*/
 
 function instalar_o_trem() {
 	add_option('scfacebook', 'true');
-	add_option('sctwitter', 'true');
 	add_option('scgplus', 'true');
 	add_option('sclinkedin', 'true');
 }
@@ -24,7 +23,7 @@ function cria_menu_sc() {
                        'manage_options', //Security
                        __FILE__,         //File to open
                        'sharecounter_code_options'  //Function to call
-                      );  
+                      );
 }
 
 function sharecounter_code_options() {
@@ -37,19 +36,16 @@ function sharecounter_code_options() {
 }
 
 function print_sharecounter_form () {
-	$scfacebook = get_option('scfacebook');   
-	$sctwitter = get_option('sctwitter');   
-	$scgplus = get_option('scgplus');  
-	$sclinkedin = get_option('sclinkedin');   
+	$scfacebook = get_option('scfacebook');
+	$scgplus = get_option('scgplus');
+	$sclinkedin = get_option('sclinkedin');
 
 	if ($scfacebook == "true") { $fbtrue = "checked"; } else { $fbfalse = "checked"; }
-	if ($sctwitter == "true") { $twtrue = "checked"; } else { $twfalse = "checked"; }
 	if ($scgplus == "true") { $gptrue = "checked"; } else { $gpfalse = "checked"; }
 	if ($sclinkedin == "true") { $lktrue = "checked"; } else { $lkfalse = "checked"; }
 
 	echo "<form method=\"post\">";
 	echo "<label>Facebook:</label><br /><input type=\"radio\" name=\"scfacebook\" value=\"true\" " . $fbtrue . "> Count <input type=\"radio\" name=\"scfacebook\" value=\"false\" " . $fbfalse . "> Don't Count <br /><br />";
-	echo "<label>Twitter:</label><br /><input type=\"radio\" name=\"sctwitter\" value=\"true\" " . $twtrue . "> Count <input type=\"radio\" name=\"sctwitter\" value=\"false\" " . $twfalse . " > Don't Count<br /><br />";
 	echo "<label>Google Plus:</label><br /><input type=\"radio\" name=\"scgplus\" value=\"true\" " . $gptrue . "> Count <input type=\"radio\" name=\"scgplus\" value=\"false\" " . $gpfalse . " > Don't Count<br /><br />";
 	echo "<label>Linkedin:</label><br /><input type=\"radio\" name=\"sclinkedin\" value=\"true\" " . $lktrue . "> Count <input type=\"radio\" name=\"sclinkedin\" value=\"false\" " . $lkfalse . " > Don't Count<br /><br />";
 
@@ -58,25 +54,23 @@ function print_sharecounter_form () {
  }
 
  function update_sharecounter_options() {
-      
+
 	update_option('scfacebook', $_REQUEST['scfacebook']);
-	update_option('sctwitter', $_REQUEST['sctwitter']);
 	update_option('scgplus', $_REQUEST['scgplus']);
 	update_option('sclinkedin', $_REQUEST['sclinkedin']);
-      
+
 
             echo '<div id="message" class="updated fade">';
             echo '<p>Updated</p>';
             echo '</div>';
-      
+
   }
 
 function sharesCounter($echo = true) {
 	$shares = 0;
-	$scfacebook = get_option('scfacebook');   
-	$sctwitter = get_option('sctwitter');   
-	$sclinkedin = get_option('sclinkedin');   
-	$scgplus = get_option('scgplus');  
+	$scfacebook = get_option('scfacebook');
+	$sclinkedin = get_option('sclinkedin');
+	$scgplus = get_option('scgplus');
 	$url = get_permalink();
 
 	if ( $scfacebook ) {
@@ -84,14 +78,6 @@ function sharesCounter($echo = true) {
 		$data_fb = simplexml_load_file($url_fb);
 		if ( isset($data_fb->link_stat->share_count) ) {
 			$shares = $shares + $data_fb->link_stat->share_count;
-		}
-	}
-
-	if ( $sctwitter ) {
-		$url_tw = "http://urls.api.twitter.com/1/urls/count.json?url=" . $url;
-		$data_tw = json_decode(file_get_contents($url_tw));
-		if ( isset($data_tw->count) ) {
-			$shares = $shares + $data_tw->count;
 		}
 	}
 
