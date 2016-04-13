@@ -1,12 +1,10 @@
 <?php
-
 /*
 Plugin Name: WPShare Counter
 Plugin URI: https://github.com/phalkmin/WPShare-Counter
 Description: This plugin allows the user to display the amount of times that an URL have been shared on different social networks. Right now it supports Facebook, Twitter, Google Plus and LinkedIn. (based from GusFune's work https://github.com/gusfune/shares-counter)
 Author: GraveHeart
-Version: 0.9
-
+Version: 0.10
 */
 
 function instalar_o_trem() {
